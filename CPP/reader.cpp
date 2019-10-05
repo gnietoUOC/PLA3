@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-#include "reader.h"
+#include "reader.hpp"
 
 Reader::Reader(char *name) {
 	this->name = name;
@@ -26,20 +23,5 @@ int Reader::dump(void) {
 
 	return 0;
 }
-
-int main(int argc, char **argv) {
-
-	if (argc!=2) {
-		printf("Sintaxis: reader <fichero>\n\n");
-		return(1);
-	}
-
-	Reader *r = new Reader(argv[1]);
-	r->dump();
-	delete r;
-
-	return 0;
-}
-
 
 
