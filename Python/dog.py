@@ -4,36 +4,42 @@ from operator import attrgetter
 class Dog:
 	species = 'mammal'
 
-	#Constructor de la clase Dog
 	def __init__(self,name,age):
+		""" Constructor de la clase Dog 
+		"""
 		self.name = name
 		self.age = age
 	
-	#Método que comprueba si el animal es un mamífero. Ahora mismo, siempre
-	#lo es porque no hay herencia.
+
 	def check(self):
+		""" Método que comprueba si el animal es un mamífero. Ahora mismo, siempre
+			lo es porque no hay herencia.
+		"""
 		if self.species == 'mammal':
 			print('{} is a {}'.format(self.name,self.species))	
 
-	#Método que devuelve un literal con el nombre y la edad del animal
+
 	def dump(self):
+		""" Método que devuelve un literal con el nombre y la edad del animal
+		"""
 		return '{} is {}'.format(self.name,self.age)
 
-	#Método que devuelve un literal comparando la edad de dos animales
+		""" Método que devuelve un literal comparando la edad de dos animales
+		"""
 	def compare(self,other):
-#		print ('{} is {} and {} is {}'.format(self.name,self.age,other.name,other.age))
+		""" Compara dos elementos de la clase Dog 
+		"""
 		print ('{} and {}'.format(self.dump(),other.dump()))
 
 	def get_biggest_number(self,*nums):
-#		print('I have been provided with {} numbers. The highest one is {}'.format(nums,max(nums)))
 		return max(*nums)
 
-	#Compara la edad de varios animales y devuelve un literal con el nombre del que tiene mayor edad
 	def get_oldest(self,*dogs):
-		#Utiliza la función attrgetter() para encontrar la edad de cada uno de los animales
-		#Convertimos un tuple (inmutable) a una lista usando la función list()
-		m = max(self,*list(dogs),key=attrgetter('age'))
-		print('I am comparing {} with {} other dog(s). The oldest one is {}.'.format(self.name,len(dogs),m.name))
+		""" Compara la edad de varios animales y devuelve un literal con el nombre del que tiene mayor edad
+			* Utiliza la función attrgetter() para encontrar la edad de cada uno de los animales
+			* Convertimos un tuple (inmutable) a una lista usando la función list()
+		"""
+		return max(self,*list(*dogs),key=attrgetter('age'))
 
 def main():
 
@@ -58,9 +64,9 @@ def main():
 	m = bambi.get_biggest_number(nums)
 	print('I have been provided with {} numbers ({}). The highest one is {}.'.format(len(nums),nums,m))
 
-
-	bambi.get_oldest(micky,simba,pumbaa)
-	simba.get_oldest(micky,bambi,pumbaa)
+	dogs = [micky,simba,pumbaa];
+	m2 = bambi.get_oldest(dogs)
+	print('I am comparing {} with {} other dog(s). The oldest one is {}.'.format(bambi.name,len(dogs),m2.name))
 
 if __name__ == '__main__':
 	sys.exit(main())
