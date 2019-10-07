@@ -24,22 +24,29 @@ class Dog:
 		"""
 		return '{} is {}'.format(self.name,self.age)
 
-		""" Método que devuelve un literal comparando la edad de dos animales
-		"""
 	def compare(self,other):
-		""" Compara dos elementos de la clase Dog 
+		""" Método que devuelve un literal comparando la edad de dos animales. 
 		"""
 		print ('{} and {}'.format(self.dump(),other.dump()))
 
-	def get_biggest_number(self,*nums):
+	@staticmethod
+	def get_biggest_number(*nums):
+		""" Devuelve el máximo de los valores de una lista. Lo he creado como 
+			método estático ya que realmente no tiene nada que ver con la clase.
+			Gracias a las 'bondades' de Python, este método también funciona con otros 
+			tipos de datos que no sean enteros, por ejemplo con cadenas. No he añadido la 
+			validación de que los elementos sean enteros. 
+		""" 
 		return max(*nums)
 
-	def get_oldest(self,*dogs):
+	@staticmethod
+	def get_oldest(*dogs):
 		""" Compara la edad de varios animales y devuelve un literal con el nombre del que tiene mayor edad
+			* He definido el método como estático porque me ha parecido más coherente
 			* Utiliza la función attrgetter() para encontrar la edad de cada uno de los animales
 			* Convertimos un tuple (inmutable) a una lista usando la función list()
 		"""
-		return max(self,*list(*dogs),key=attrgetter('age'))
+		return max(*list(*dogs),key=attrgetter('age'))
 
 def main():
 
@@ -61,11 +68,11 @@ def main():
 	bambi.check()
 
 	nums = [1,3,5,7,4,2]
-	m = bambi.get_biggest_number(nums)
+	m = Dog.get_biggest_number(nums)
 	print('I have been provided with {} numbers ({}). The highest one is {}.'.format(len(nums),nums,m))
 
-	dogs = [micky,simba,pumbaa];
-	m2 = bambi.get_oldest(dogs)
+	dogs = [bambi,micky,simba,pumbaa,timon];
+	m2 = Dog.get_oldest(dogs)
 	print('I am comparing {} with {} other dog(s). The oldest one is {}.'.format(bambi.name,len(dogs),m2.name))
 
 if __name__ == '__main__':

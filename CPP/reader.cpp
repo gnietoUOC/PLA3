@@ -12,7 +12,7 @@ int Reader::dump(void) {
 
 	if (!(file = fopen(name,"r"))) {
 		printf("No puedo abrir el fichero.\n\n");
-		return(2);
+		return 2;
 	}
 
 	while(fgets(line,sizeof(line),file)) {
