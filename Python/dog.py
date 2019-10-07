@@ -40,6 +40,16 @@ class Dog:
 		return max(*nums)
 
 	@staticmethod
+	def get_biggest_number(*nums):
+		""" Devuelve el máximo de los valores de una lista. Lo he creado como 
+			método estático ya que realmente no tiene nada que ver con la clase.
+			Gracias a las 'bondades' de Python, este método también funciona con otros 
+			tipos de datos que no sean enteros, por ejemplo con cadenas. No he añadido la 
+			validación de que los elementos sean enteros. 
+		""" 
+		return max(*nums)
+
+	@staticmethod
 	def get_oldest(*dogs):
 		""" Compara la edad de varios animales y devuelve un literal con el nombre del que tiene mayor edad
 			* He definido el método como estático porque me ha parecido más coherente
@@ -67,6 +77,8 @@ def main():
 	bambi.compare(micky)
 	bambi.check()
 
+	m = Dog.get_biggest_number(3,2,1,4,9,5,0)
+	print('The highest value is {}.'.format(m))
 	nums = [1,3,5,7,4,2]
 	m = Dog.get_biggest_number(nums)
 	print('I have been provided with {} numbers ({}). The highest one is {}.'.format(len(nums),nums,m))
