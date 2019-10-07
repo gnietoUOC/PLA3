@@ -1,9 +1,11 @@
 
-reader.o: 	reader.c
-	gcc -o reader.o -c reader.c
+OBJ = reader.o 
 
-reader: 	reader.o
-	gcc -o reader reader.o
+*.o: 	*.c
+	gcc -o $@ -c $<
+
+reader: 	$(OBJ)
+	gcc -o $@ $(OBJ)
 
 clean: 
-	rm reader.o reader
+	rm reader $(OBJ)

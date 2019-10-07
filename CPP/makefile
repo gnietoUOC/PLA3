@@ -1,11 +1,11 @@
 
-obj = main.o reader.o 
+OBJ = main.o reader.o 
 
 *.o: 		*.cpp
 	g++ -o $@ -c $<
 
-reader: 	$(obj)
-	g++ -o $@ $(obj)
+reader: 	$(OBJ)
+	g++ -o $@ $(OBJ)
 
 clean: 
-	rm reader *.o
+	rm reader $(OBJ)

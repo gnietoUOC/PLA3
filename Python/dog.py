@@ -5,7 +5,7 @@ class Dog:
 	species = 'mammal'
 
 	def __init__(self,name,age):
-		""" Constructor de la clase Dog 
+		""" Constructor de la clase Dog.
 		"""
 		self.name = name
 		self.age = age
@@ -20,7 +20,7 @@ class Dog:
 
 
 	def dump(self):
-		""" Método que devuelve un literal con el nombre y la edad del animal
+		""" Método que devuelve un literal con el nombre y la edad del animal.
 		"""
 		return '{} is {}'.format(self.name,self.age)
 
