@@ -1,10 +1,11 @@
 import sys
 from operator import attrgetter
 
-class Dog:
+
+class Dog(object):
 	species = 'mammal'
 
-	def __init__(self,name,age):
+	def __init__(self, name, age):
 		""" Constructor de la clase Dog.
 		"""
 		self.name = name
@@ -12,51 +13,63 @@ class Dog:
 	
 
 	def check(self):
-		""" Método que comprueba si el animal es un mamífero. Ahora mismo, siempre
-			lo es porque no hay herencia.
+		""" Método que comprueba si el animal es un mamífero. Ahora mismo, 
+			siempre lo es porque no hay herencia.
 		"""
 		if self.species == 'mammal':
-			print('{} is a {}'.format(self.name,self.species))	
+			print('{name} is a {species}'.format(
+				name = self.name,
+				species = self.species))	
 
 
 	def dump(self):
 		""" Método que devuelve un literal con el nombre y la edad del animal.
 		"""
-		return '{} is {}'.format(self.name,self.age)
+		return '{name} is {age}'.format(
+			name = self.name,
+			age = self.age)
 
-	def compare(self,other):
+	def compare(self, other):
 		""" Método que devuelve un literal comparando la edad de dos animales. 
 		"""
-		print ('{} and {}'.format(self.dump(),other.dump()))
+		print ('{dump1} and {dump2}'.format(
+			dump1 = self.dump(),
+			dump2 = other.dump()))
 
 	@staticmethod
 	def get_biggest_number(*nums):
 		""" Devuelve el máximo de los valores de una lista. Lo he creado como 
 			método estático ya que realmente no tiene nada que ver con la clase.
-			Gracias a las 'bondades' de Python, este método también funciona con otros 
-			tipos de datos que no sean enteros, por ejemplo con cadenas. No he añadido la 
-			validación de que los elementos sean enteros. 
+			Gracias a las 'bondades' de Python, este método también funciona con
+			otros tipos de datos que no sean enteros, por ejemplo con cadenas. 
+			No he añadido la validación de que los elementos sean enteros. 
 		""" 
 		return max(*nums)
 
 	@staticmethod
 	def get_biggest_number(*nums):
-		""" Devuelve el máximo de los valores de una lista. Lo he creado como 
-			método estático ya que realmente no tiene nada que ver con la clase.
-			Gracias a las 'bondades' de Python, este método también funciona con otros 
-			tipos de datos que no sean enteros, por ejemplo con cadenas. No he añadido la 
-			validación de que los elementos sean enteros. 
+		""" Devuelve el máximo de los valores de una lista. Lo he creado 
+			como método estático ya que realmente no tiene nada que ver con 
+			la clase.
+			Gracias a las 'bondades' de Python, este método también funciona 
+			con otros tipos de datos que no sean enteros, por ejemplo con cadenas. 
+			No he añadido la validación de que los elementos sean enteros. 
 		""" 
 		return max(*nums)
 
 	@staticmethod
 	def get_oldest(*dogs):
-		""" Compara la edad de varios animales y devuelve un literal con el nombre del que tiene mayor edad
-			* He definido el método como estático porque me ha parecido más coherente
-			* Utiliza la función attrgetter() para encontrar la edad de cada uno de los animales
-			* Convertimos un tuple (inmutable) a una lista usando la función list()
+		""" Compara la edad de varios animales y devuelve un literal con el 
+			nombre del que tiene mayor edad.
+			* He definido el método como estático porque me ha parecido más 
+			  coherente.
+			* Utiliza la función attrgetter() para encontrar la edad de cada 
+			  uno de los animales
+			* Convertimos un tuple (inmutable) a una lista usando la función 
+			  list()
 		"""
 		return max(*list(*dogs),key=attrgetter('age'))
+
 
 def main():
 
@@ -78,14 +91,20 @@ def main():
 	bambi.check()
 
 	m = Dog.get_biggest_number(3,2,1,4,9,5,0)
-	print('The highest value is {}.'.format(m))
+	print('The highest value is {max}.'.format(max = m))
 	nums = [1,3,5,7,4,2]
 	m = Dog.get_biggest_number(nums)
-	print('I have been provided with {} numbers ({}). The highest one is {}.'.format(len(nums),nums,m))
+	print('I have been provided with {n} numbers ({nums}). The highest one is {max}.'.format(
+		n = len(nums),
+		nums = nums,
+		max = m))
 
 	dogs = [bambi,micky,simba,pumbaa,timon];
 	m2 = Dog.get_oldest(dogs)
-	print('I am comparing {} with {} other dog(s). The oldest one is {}.'.format(bambi.name,len(dogs),m2.name))
+	print('I am comparing {name1} with {n} other dog(s). The oldest one is {name2}.'.format(
+		name1 = bambi.name,
+		n = len(dogs),
+		name2 = m2.name))
 
 if __name__ == '__main__':
 	sys.exit(main())
