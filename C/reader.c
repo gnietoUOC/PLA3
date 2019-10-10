@@ -31,6 +31,8 @@ int dump(char *name) {
 	FILE *file;
 	char line[256];
 	char line2[256];
+	char *pline;
+	char *pline2;
 	iconv_t cd; 
 	size_t size;
 	size_t size2;
@@ -54,8 +56,8 @@ int dump(char *name) {
 		// Leo el fichero línea a a línea
 		while(fgets(line,sizeof(line),file)) {
 			if (type==2) {
-				char *pline = line; 
-				char *pline2 = line2; 
+				pline = line; 
+				pline2 = line2; 
 				size = strlen(line);
 				size2 = 256;
 				iconv(cd,&pline,&size,&pline2,&size2);
