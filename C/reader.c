@@ -73,6 +73,7 @@ int dump(char *name) {
 	if (type==2) {
 		iconv_close(cd);
 	}
+
 	// Cierro el fichero
 	fclose(file);
 
