@@ -4,6 +4,32 @@
 
 #include <iconv.h>
 
+#include <iconv.h>
+
+int checkEncoding(char *name) {
+	FILE *file;
+	int rc = -1;
+
+	if (file = fopen(name,"rb")) {
+		int c = fgetc(file);
+		printf("Found: %d\n",c);
+		switch (c) {
+			case 239:
+				rc = 1;
+				break;
+			case 254:
+			case 255:	// UTF-8
+				rc = 3;
+				break;
+			default: 	// ANSI
+				rc = 2;	
+		}
+		fclose(file);
+	}
+	return rc;	
+
+}
+
 int dump(char *name) {
 	FILE *file;
 	char line[256];
@@ -15,7 +41,10 @@ int dump(char *name) {
 	char *pline = line; 
 	char *pline2 = line2; 
 
-	printf("Leyendo: %s\n\n",name);
+	printf("Leyendo: %s\n",name);
+
+	int type = checkEncoding(name);
+	printf("Enconding: %d\n\n",type);
 
 	// Si no puedo abrir el fichero (o no existe) devuelvo un error
 	if (!(file = fopen(name,"r"))) {
