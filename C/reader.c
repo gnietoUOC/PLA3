@@ -4,8 +4,6 @@
 
 #include <iconv.h>
 
-#include <iconv.h>
-
 int checkEncoding(char *name) {
 	FILE *file;
 	int rc = -1;
