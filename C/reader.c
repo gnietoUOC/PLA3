@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include <iconv.h>
 
 int checkEncoding(char *name) {
 	FILE *file;
-	int rc = -1;
+	int rc = 0;
 
 	if (file = fopen(name,"rb")) {
 		int c = fgetc(file);
-		printf("Found: %d\n",c);
 		switch (c) {
 			case 239:
 				rc = 1;
@@ -30,6 +30,10 @@ int checkEncoding(char *name) {
 int dump(char *name) {
 	FILE *file;
 	char line[256];
+	char line2[256];
+	iconv_t cd; 
+	size_t size;
+	size_t size2;
 
 	printf("Leyendo: %s\n",name);
 
@@ -42,11 +46,31 @@ int dump(char *name) {
 		return 2;
 	}
 
-	// Leo el fichero línea a a línea
-	while(fgets(line,sizeof(line),file)) {
-		printf("%s",line);
+	if (type==2) {
+		cd = iconv_open("UTF-8","ISO-8859-1");
 	}
 
+	if (type>0) {
+		// Leo el fichero línea a a línea
+		while(fgets(line,sizeof(line),file)) {
+			if (type==2) {
+				char *pline = line; 
+				char *pline2 = line2; 
+				size = strlen(line);
+				size2 = 256;
+				iconv(cd,&pline,&size,&pline2,&size2);
+				*pline2='\0';
+				printf("%s",line2);
+			} else {
+				printf("%s",line);
+			
+			}
+		}
+	}
+
+	if (type==2) {
+		iconv_close(cd);
+	}
 	// Cierro el fichero
 	fclose(file);
 
