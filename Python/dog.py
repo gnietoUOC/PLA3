@@ -38,16 +38,6 @@ class Dog(object):
 
 	@staticmethod
 	def get_biggest_number(*nums):
-		""" Devuelve el máximo de los valores de una lista. Lo he creado como 
-			método estático ya que realmente no tiene nada que ver con la clase.
-			Gracias a las 'bondades' de Python, este método también funciona con
-			otros tipos de datos que no sean enteros, por ejemplo con cadenas. 
-			No he añadido la validación de que los elementos sean enteros. 
-		""" 
-		return max(*nums)
-
-	@staticmethod
-	def get_biggest_number(*nums):
 		""" Devuelve el máximo de los valores de una lista. Lo he creado 
 			como método estático ya que realmente no tiene nada que ver con 
 			la clase.
